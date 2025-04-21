@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f4f8;
+            color: #2d3748;
+        }
+        .slide {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .slide:hover {
+            transform: translateY(-5px);
+        }
+        .title-slide {
+            background: linear-gradient(135deg, #4776E6, #8E54E9);
+            color: white;
+            text-align: center;
+            padding: 60px 30px;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #3182ce;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3182ce;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .title-slide .title {
+            font-size: 36px;
+            color: white;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+        .subtitle {
+            font-size: 22px;
+            color: #4a5568;
+            margin: 20px 0 15px 0;
+            border-left: 4px solid #3182ce;
+            padding-left: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .content {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .flow-box {
+            background-color: #ebf8ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #4299e1;
+        }
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .step {
+            background-color: #3182ce;
+            color: white;
+            border-radius: 10px;
+            padding: 20px 15px;
+            width: 21%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        .step-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .arrow {
+            display: flex;
+            align-items: center;
+            color: #718096;
+            font-size: 24px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .check-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .check-item {
+            background-color: #e6fffa;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            border-left: 4px solid #38b2ac;
+            transition: transform 0.2s ease;
+        }
+        .check-item:hover {
+            transform: scale(1.03);
+        }
+        .planning-sheet {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f7fafc;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .planning-row {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #edf2f7;
+            padding-bottom: 10px;
+        }
+        .planning-row:last-child {
+            border-bottom: none;
+        }
+        .planning-label {
+            font-weight: bold;
+            width: 120px;
+            color: #4a5568;
+        }
+        .icon-bullet {
+            color: #3182ce;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .title-icon {
+            margin-right: 15px;
+            font-size: 1.8rem;
+            color: #3182ce;
+        }
+        .title-slide .title-icon {
+            color: white;
+            font-size: 2.5rem;
+        }
+        .subtitle-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: #4a5568;
+        }
+        .two-columns {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .column {
+            flex: 1;
+        }
+        .image-placeholder {
+            background-color: #edf2f7;
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            color: #a0aec0;
+        }
+        .tip-box {
+            background-color: #FFFAF0;
+            border-left: 4px solid #F6AD55;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .warning-box {
+            background-color: #FFF5F5;
+            border-left: 4px solid #FC8181;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .quiz-box {
+            background-color: #FAF5FF;
+            border: 2px solid #9F7AEA;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+            position: relative;
+        }
+        .quiz-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: #9F7AEA;
+            color: white;
+            padding: 2px 15px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .quiz-option {
+            background-color: #EBF4FF;
+            border: 1px solid #BEE3F8;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .quiz-option:hover {
+            background-color: #BEE3F8;
+            transform: translateY(-2px);
+        }
+        .quiz-answer {
+            background-color: #F0FFF4;
+            border-left: 4px solid #68D391;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        .show-answer-btn {
+            background-color: #9F7AEA;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .show-answer-btn:hover {
+            background-color: #805AD5;
+        }
+        .example-slide {
+            background-color: #f8f9fa;
+            border: 1px dashed #ced4da;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .example-slide-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 10px;
+        }
+        .example-slide-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide title-slide">
+        <div class="title">
+            <span class="title-icon">📊</span>
+            プレゼンテーションの基本
+        </div>
+        <div class="content" style="font-size: 18px; color: rgba(255,255,255,0.9);">
+            効果的なプレゼンテーションスキルを身につけ、あなたのアイデアを魅力的に伝えるための完全ガイド
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="title">
+            <span class="title-icon">🎯</span>
+            プレゼンテーションとは
+        </div>
+        <div class="content">
+            <div class="two-columns">
+                <div class="column">
+                    プレゼンテーションとは、相手に直接自分の意思やアイデアを効率よく伝える情報伝達の方法です。効果的なプレゼンテーションを行うためには、適切な準備と実践が必要です。
+                    
+                    <div class="tip-box">
+                        <span style="font-size: 1.2rem; color: #ED8936;">💡</span> <strong>ポイント:</strong> プレゼンテーションの成功は準備の質に大きく左右されます。話す内容だけでなく、視覚資料の質、話し方、姿勢なども重要な要素です。
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="image-placeholder">
+                        🎤
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-box">
+                <div class="quiz-label">クイズ</div>
+                <div><strong>Q: プレゼンテーションの主な目的は何ですか？</strong></div>
+                <div class="quiz-options">
+                    <div class="quiz-option">A: 聴衆を楽しませること</div>
+                    <div class="quiz-option">B: 自分の知識を誇示すること</div>
+                    <div class="quiz-option">C: 情報やアイデアを効果的に伝えること</div>
+                    <div class="quiz-option">D: できるだけ多くの情報を短時間で伝えること</div>
+                </div>
+                <button class="show-answer-btn" onclick="document.getElementById('answer1').style.display='block'">答えを見る</button>
+                <div id="answer1" class="quiz-answer">
+                    <strong>正解: C</strong><br>
+                    プレゼンテーションの主な目的は、情報やアイデアを効果的に伝えることです。単に情報を伝えるだけでなく、相手に理解してもらい、場合によっては行動を促すことが重要です。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="title">
+            <span class="title-icon">🔄</span>
+            プレゼンテーションの流れ
+        </div>
+        <div class="content">
+            効果的なプレゼンテーションを実施するためには、以下の流れに沿って準備と実施を行います。
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">📝</div>
+                    <div>企画・作成</div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step">
+                    <div class="step-icon">🔄</div>
+                    <div>リハーサル</div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step">
+                    <div class="step-icon">🎬</div>
+                    <div>実施</div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step">
+                    <div class="step-icon">📊</div>
+                    <div>評価・改善</div>
+                </div>
+            </div>
+            <div class="flow-box">
+                <span style="font-size: 1.2rem;">🔍</span> プレゼンテーションは一度で終わりではなく、評価と改善を繰り返すことで次回のプレゼンテーションをより良いものにします。このプロセスは「フィードバック」と呼ばれます。
+            </div>
+            
+            <div class="quiz-box">
+                <div class="quiz-label">クイズ</div>
+                <div><strong>Q: プレゼンテーションのプロセスで「フィードバック」が重要な理由は？</strong></div>
+                <div class="quiz-options">
+                    <div class="quiz-option">A: 聴衆に好印象を与えるため</div>
+                    <div class="quiz-option">B: 次回のプレゼンテーションを改善するため</div>
+                    <div class="quiz-option">C: 準備時間を短縮するため</div>
+                    <div class="quiz-option">D: 技術的な問題を避けるため</div>
+                </div>
+                <button class="show-answer-btn" onclick="document.getElementById('answer2').style.display='block'">答えを見る</button>
+                <div id="answer2" class="quiz-answer">
+                    <strong>正解: B</strong><br>
+                    フィードバックは次回のプレゼンテーションを改善するために重要です。評価と改善を繰り返すことで、プレゼンテーションスキルを継続的に向上させることができます。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="title">
+            <span class="title-icon">📋</span>
+            プレゼンテーションの企画
+        </div>
+        <div class="content">
+            <div class="subtitle">
+                <span class="subtitle-icon">📌</span>
+                企画のポイント
+            </div>
+            <ul>
+                <li><span class="icon-bullet">🎯</span> テーマと目的を明確にする</li>
+                <li><span class="icon-bullet">🧠</span> 参加者に何を理解してもらうかを決める</li>
+                <li><span class="icon-bullet">👥</span> 参加者の人数、関心度、年齢層、知識や経験を調査する</li>
+                <li><span class="icon-bullet">📊</span> 必要な情報を収集・整理・分析する</li>
+            </ul>
+            
+            <div class="subtitle">
+                <span class="subtitle-icon">📑</span>
+                プレゼンテーションの構成
+            </div>
+            <ul>
+                <li><span class="icon-bullet">🔍</span> <strong>導入</strong>（テーマ、目的、概要を示す）</li>
+                <li><span class="icon-bullet">📈</span> <strong>展開</strong>（内容を整理し、順序立てて示す）</li>
+                <li><span class="icon-bullet">✅</span> <strong>まとめ</strong>（主張をまとめる）</li>
+            </ul>
+            
+            <div class="subtitle">
+                <span class="subtitle-icon">📝</span>
+                プランニングシートの例
+            </div>
+            <div class="planning-sheet">
+                <div class="planning-row">
+                    <div class="planning-label">📅 日時:</div>
+                    <div>10月10日 15:00-15:20</div>
+                </div>
+                <div class="planning-row">
+                    <div class="planning-label">📍 場所:</div>
+                    <div>視聴覚教室</div>
+                </div>
+                <div class="planning-row">
+                    <div class="planning-label">🏷️ テーマ:</div>
+                    <div>BCDE高校の学校案内</div>
+                </div>
+                <div class="planning-row">
+                    <div class="planning-label">🎯 目的:</div>
+                    <div>中学生に本校の特色や高校生活をわかりやすく紹介する</div>
+                </div>
+                <div class="planning-row">
+                    <div class="planning-label">👥 参加者:</div>
+                    <div>X中学校40人、Y中学校30人</div>
+                </div>
+            </div>
+            
+            <div class="quiz-box">
+                <div class="quiz-label">クイズ</div>
+                <div><strong>Q: プレゼンテーションの構成で最も効果的な順序は？</strong></div>
+                <div class="quiz-options">
+                    <div class="quiz-option">A: まとめ → 導入 → 展開</div>
+                    <div class="quiz-option">B: 導入 → まとめ → 展開</div>
+                    <div class="quiz-option">C: 導入 → 展開 → まとめ</div>
+                    <div class="quiz-option">D: 展開 → 導入 → まとめ</div>
+                </div>
+                <button class="show-answer-btn" onclick="document.getElementById('answer3').style.display='block'">答えを見る</button>
+                <div id="answer3" class="quiz-answer">
+                    <strong>正解: C</strong><br>
+                    効果的なプレゼンテーションの基本構成は「導入 → 展開 → まとめ」です。まず聴衆の注意を引き、テーマを紹介し（導入）、次に主要な内容を説明し（展開）、最後に重要なポイントをまとめる（まとめ）という流れが理解を促進します。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="title">
+            <span class="title-icon">💻</span>
+            スライドの作成
+        </div>
+        <div class="content">
+            <div class="subtitle">
+                <span class="subtitle-icon">✨</span>
+                効果的なスライド作成のポイント
+            </div>
+            <div class="two-columns">
+                <div class="column">
+                    <ul>
+                        <li><span class="icon-bullet">🎨</span> テンプレートを用いてデザインを統一する</li>
+                        <li><span class="icon-bullet">📝</span> 文章ではなく、キーワードや箇条書き、図を使用する</li>
+                        <li><span class="icon-bullet">🔍</span> 文字は大きく、読みやすくする</li>
+                        <li><span class="icon-bullet">↕️</span> 行間を詰めすぎない</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul>
+                        <li><span class="icon-bullet">🎭</span> 書体や配色を考慮する</li>
+                        <li><span class="icon-bullet">📊</span> データは表やグラフにして見やすくする</li>
+                        <li><span class="icon-bullet">🔗</span> 関連するグループごとにまとめる</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <span style="font-size: 1.2rem; color: #E53E3E;">⚠️</span> <strong>注意点:</strong> スライドに詰め込みすぎないこと。1枚のスライドに伝えたいことは1つか2つに絞りましょう。
+            </div>
+            
+            <div class="subtitle">
+                <span class="subtitle-icon">👥</span>
+                グループでの作業時の注意点
+            </div>
+            <div class="flow-box">
+                <span style="font-size: 1.2rem;">🔄</span> グループで分担してスライドを作成する場合、あらかじめスライドマスタを作成するなど、デザインを統一しておく。そうしないと、後で一つにまとめる時に、デザインを変えざるを得ない作業が発生する。
+            </div>
+            
+            <div class="subtitle">
+                <span class="subtitle-icon">👀</span>
+                良いスライドと悪いスライドの例
+            </div>
+            <div class="two-columns">
+                <div class="column">
+                    <div class="example-slide" style="background-color: #e6fffa;">
+                        <div class="example-slide-title">✅ 良いスライドの例</div>
+                        <div class="example-slide-content">
+                            <div style="text-align: center;">
+                                <h3 style="color: #285e61;">インターネットの安全な使い方</h3>
+                                <ul style="list-style-type: none; padding: 0;">
+                                    <li>🔒 強力なパスワードの作成</li>
+                                    <li>🔍 信頼できるサイトの見分け方</li>
+                                    <li>🛡️ 個人情報の保護方法</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="example-slide" style="background-color: #fff5f5;">
+                        <div class="example-slide-title">❌ 悪いスライドの例</div>
+                        <div class="example-slide-content">
+                            <div style="text-align: left; font-size: 12px;">
+                                <h3 style="color: #822727;">インターネットの安全な使い方とパスワード管理および個人情報保護について</h3>
+                                <p style="line-height: 1.2;">インターネットを安全に使用するためには、強力なパスワードを作成することが重要です。パスワードは8文字以上で、大文字、小文字、数字、記号を含めるべきです。また、定期的にパスワードを変更することも重要です。さらに、信頼できるウェブサイトを見分けることも重要で、URLがhttpsで始まっているか確認してください。また、ウェブサイトのプライバシーポリシーを確認することも大切です。個人情報を保護するためには、必要な情報のみを提供し、公共のWi-Fiでの機密情報の送信は避けるべきです。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-box">
+                <div class="quiz-label">クイズ</div>
+                <div><strong>Q: 効果的なスライドに関する次の記述のうち、正しいのはどれですか？</strong></div>
+                <div class="quiz-options">
+                    <div class="quiz-option">A: できるだけ多くの情報を一つのスライドに詰め込むべき</div>
+                    <div class="quiz-option">B: 文字サイズは小さくして、より多くのテキストを入れるべき</div>
+                    <div class="quiz-option">C: キーワードや箇条書きよりも、完全な文章の方が望ましい</div>
+                    <div class="quiz-option">D: 視覚的要素（グラフ、図）を使用して情報を伝えるべき</div>
+                </div>
+                <button class="show-answer-btn" onclick="document.getElementById('answer4').style.display='block'">答えを見る</button>
+                <div id="answer4" class="quiz-answer">
+                    <strong>正解: D</strong><br>
+                    効果的なスライドでは、視覚的要素（グラフ、図、アイコンなど）を使用して情報を伝えるべきです。これにより、聴衆の理解が促進され、情報が記憶に残りやすくなります。一方、スライドに情報を詰め込みすぎたり、文字サイズを小さくしたり、長い文章を使用したりすると、理解しにくくなります。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="title">
+            <span class="title-icon">🔄</span>
+            リハーサル
+        </div>
+        <div class="content">
+            <div class="subtitle">
+                <span class="subtitle-icon">⚡</span>
+                リハーサルの重要性
+            </div>
+            <div class="flow-box">
+                <span style="font-size: 1.2rem;">🔍</span> プレゼンテーションを実施する前に、必ずリハーサルを行う。リハーサル用のチェックシートを作成し、確認した項目をチェックする。問題がある項目はすぐに対処し、本番に備える。
+            </div>
+            
+            <div class="subtitle">
+                <span class="subtitle-icon">✅</span>
+                リハーサル用チェックシート
+            </div>
+            <div class="check-grid">
+                <div class="check-item">
+                    <span style="font-size: 1.2rem; margin-right: 10px;">🏢</span> 会場の事前確認
+                </div>
+                <div class="check-item">
+                    <span style="font-size: 1.2rem; margin-right: 10px;">🖥️</span> 利用機器の確認
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
